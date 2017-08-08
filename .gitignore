@@ -57,3 +57,9 @@ typings/
 # dotenv environment variables file
 .env
 
+closure-compiler/*.jar
+closure-compiler/*.md
+closure-compiler/COPYING
+
+src/js/deps.js
+dist

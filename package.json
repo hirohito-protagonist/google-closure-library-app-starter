@@ -1,0 +1,31 @@
+{
+  "name": "google-closure-library-app-starter",
+  "version": "1.0.0",
+  "description": "This project is an application skeleton for build web apps with google closure library.",
+  "scripts": {
+    "start": "concurrently \"gulp dev\" \"http-server .\"",
+    "build": "gulp build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hirohito-protagonist/google-closure-library-app-starter.git"
+  },
+  "author": "hirohito-protagonist",
+  "license": "MIT",
+  "private": true,
+  "bugs": {
+    "url": "https://github.com/hirohito-protagonist/google-closure-library-app-starter/issues"
+  },
+  "homepage": "https://github.com/hirohito-protagonist/google-closure-library-app-starter#readme",
+  "dependencies": {
+    "concurrently": "3.5.0",
+    "google-closure-library": "20170626.0.0",
+    "gulp": "3.9.1",
+    "gulp-closure-compiler": "0.4.0",
+    "gulp-closure-deps": "0.4.0",
+    "gulp-load-plugins": "1.5.0",
+    "gulp-task-listing": "1.0.1",
+    "http-server": "0.10.0"
+  }
+}
