@@ -20,7 +20,9 @@ npm install
 # start the server
 npm start
 
-# The local server connection should be open. By default is http://localhost:8080 so the development link will be http://localhost:8080/src/html/app.html
+# The local server connection should be open. 
+# By default is http://localhost:8080 so the development link will be 
+# http://localhost:8080/src/html/app.html
 ```
 ___
 
