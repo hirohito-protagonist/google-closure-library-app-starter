@@ -8,7 +8,7 @@ ___
 * add support for soy templates
 * add sass, sprite support
 * add unit test support
-* eslint, git hooks and convetional messages
+* eslint
 * dev server with livereload
 ___
 
