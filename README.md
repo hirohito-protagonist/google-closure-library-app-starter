@@ -28,7 +28,6 @@ ___
 
 # TODO
 * write documentation
-* add support for soy templates
 * add sass, sprite support
 * add unit test support
 * eslint

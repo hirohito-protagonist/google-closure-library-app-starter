@@ -20,15 +20,17 @@
   },
   "homepage": "https://github.com/hirohito-protagonist/google-closure-library-app-starter#readme",
   "dependencies": {
+    "closure-templates": "20160825.0.0",
     "concurrently": "3.5.0",
     "google-closure-library": "20170626.0.0",
     "gulp": "3.9.1",
     "gulp-closure-compiler": "0.4.0",
     "gulp-closure-deps": "0.4.0",
     "gulp-load-plugins": "1.5.0",
+    "gulp-soynode": "1.5.4",
     "gulp-task-listing": "1.0.1",
     "http-server": "0.10.0",
-    "husky": "^0.14.3",
-    "validate-commit-msg": "^2.14.0"
+    "husky": "0.14.3",
+    "validate-commit-msg": "2.14.0"
   }
 }
