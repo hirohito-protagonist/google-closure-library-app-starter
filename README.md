@@ -62,7 +62,7 @@ npm run build
 ___
 
 # TODO
-* add sass, sprite support
+* add sprite support
 * add unit test support
 * eslint
 * dev server with livereload
