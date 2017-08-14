@@ -4,8 +4,8 @@ const fs = require('fs');
 
 
 gulp.task('default', ['help']);
-gulp.task('dev', ['generate-closure-deps', 'generate-soy-template', 'watch']);
-gulp.task('build', ['build-scripts']);
+gulp.task('dev', ['generate-closure-deps', 'generate-soy-template', 'sass', 'watch']);
+gulp.task('build', ['build-css', 'build-scripts']);
 gulp.task('help', $.taskListing);
 
 const paths = {
@@ -23,8 +23,9 @@ gulp.task('watch', () => {
     'src/js/app/**/*.js',
     'src/js/app/**/*.soy',
     '!src/js/app/soy/**/*.js',
-    '!src/js/app/soy/**/*.soy'
-  ], ['generate-closure-deps', 'generate-soy-template']);
+    '!src/js/app/soy/**/*.soy',
+    './src/scss/**/*.scss'
+  ], ['generate-closure-deps', 'generate-soy-template', 'sass']);
 });
 
 gulp.task('generate-soy-template', () => {
@@ -67,6 +68,29 @@ gulp.task('build-scripts', ['generate-closure-deps', 'generate-soy-template'],  
     .pipe(gulp.dest('dist/js/'));
 });
 
+
+gulp.task('sass', () => {
+
+  return gulp.src('./src/scss/**/*.scss')
+    .pipe($.sourcemaps.init())
+    .pipe($.sass().on('error', $.sass.logError))
+    .pipe($.autoprefixer({
+      browsers: ['last 2 versions'],
+      cascade: false
+    }))
+    .pipe($.sourcemaps.write())
+    .pipe(gulp.dest('./src/css'));
+});
+
+gulp.task('build-css', ['sass'], function () {
+
+  return gulp.src([
+    './src/css/*.css'
+  ])
+    .pipe($.csso())
+    .pipe($.concat('app.min.css'))
+    .pipe(gulp.dest('./dist/css/'));
+});
 
 function resolveComplilerFile() {
   const path = `${__dirname}/closure-compiler/`;
