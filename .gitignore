@@ -62,6 +62,8 @@ closure-compiler/*.md
 closure-compiler/COPYING
 
 src/js/deps.js
+src/js/deps.test.js
 dist/js
 .cache
 src/js/app/soy
+tests/

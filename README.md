@@ -63,7 +63,6 @@ ___
 
 # TODO
 * add sprite support
-* add unit test support
 * eslint
 * dev server with livereload
 

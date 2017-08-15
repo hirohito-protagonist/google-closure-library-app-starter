@@ -13,7 +13,7 @@ const paths = {
     'node_modules/google-closure-library/closure/goog/**/*.js',
     'node_modules/google-closure-library/third_party/**/*.js',
     'node_modules/closure-templates/soyutils_usegoog.js',
-    'src/js/app/**/*.js',
+    'src/js/app/**/!(*.spec)+(.js)',
     'src/js/app/soy/.cache/**/*.soy.js'
   ]
 };
@@ -44,6 +44,17 @@ gulp.task('generate-closure-deps', () => {
   return gulp.src(paths.scripts)
     .pipe($.closureDeps({
       fileName: 'deps.js',
+      prefix: '../../../../',
+      baseDir: './'
+    }))
+    .pipe(gulp.dest('src/js'));
+});
+
+gulp.task('generate-closure-deps-test', () => {
+
+  return gulp.src(paths.scripts)
+    .pipe($.closureDeps({
+      fileName: 'deps.test.js',
       prefix: '../../../../',
       baseDir: './'
     }))
@@ -82,7 +93,7 @@ gulp.task('sass', () => {
     .pipe(gulp.dest('./src/css'));
 });
 
-gulp.task('build-css', ['sass'], function () {
+gulp.task('build-css', ['sass'], () => {
 
   return gulp.src([
     './src/css/*.css'
@@ -96,4 +107,31 @@ function resolveComplilerFile() {
   const path = `${__dirname}/closure-compiler/`;
   const compilerFile = fs.readdirSync(`${__dirname}/closure-compiler/`).find((file) => file.match(/compiler/g));
   return `${path}${compilerFile}`;
+}
+
+
+gulp.task('test', ['generate-closure-deps-test'], (done) => {
+  testRunner(true, done)
+});
+
+gulp.task('test-watch', ['generate-closure-deps-test'], (done) => {
+  testRunner(false, done)
+});
+
+function testRunner(isSingleRun, done) {
+  const karma = require('karma').server;
+
+  karma.start({
+    configFile: __dirname + '/karma.conf.js',
+    singleRun: isSingleRun
+  }, karmaCompleted);
+
+  function karmaCompleted(karmaResult) {
+
+    if (karmaResult === 1) {
+      done('karam: test failed with code ' + karmaResult);
+    } else {
+      done();
+    }
+  }
 }

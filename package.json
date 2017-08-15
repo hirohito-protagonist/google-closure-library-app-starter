@@ -5,7 +5,8 @@
   "scripts": {
     "start": "concurrently \"gulp dev\" \"http-server .\"",
     "build": "gulp build",
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "gulp test",
+    "test:watch": "gulp test-watch",
     "commitmsg": "validate-commit-msg"
   },
   "repository": {
@@ -36,6 +37,11 @@
     "gulp-task-listing": "1.0.1",
     "http-server": "0.10.0",
     "husky": "0.14.3",
+    "jasmine": "2.7.0",
+    "karma": "1.7.0",
+    "karma-chrome-launcher": "2.2.0",
+    "karma-coverage": "1.1.1",
+    "karma-jasmine": "1.1.0",
     "validate-commit-msg": "2.14.0"
   }
 }
