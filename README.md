@@ -47,6 +47,7 @@ Java HotSpot(TM) 64-Bit Server VM (build 25.144-b01, mixed mode)
 * Download latest [closure compiler binary](https://github.com/google/closure-compiler/wiki/Binary-Downloads) and then unzip it to `closure-compiler` folder in the project. The closure compiler is just need when you want to build production build.
 
 ## Installing
+* `fork` this repo
 * `clone` this repo
 * `npm install` to install all dependencies
 
@@ -58,6 +59,15 @@ npm start
 ### build files
 ```bash
 npm run build
+```
+### unit test
+```bash
+# single run
+npm run test
+npm test
+npm t
+# watch mode on files
+npm run test:watch
 ```
 ___
 
