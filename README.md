@@ -44,11 +44,9 @@ java version "1.8.0_144"
 Java(TM) SE Runtime Environment (build 1.8.0_144-b01)
 Java HotSpot(TM) 64-Bit Server VM (build 25.144-b01, mixed mode)
 ```
-* Download latest [closure compiler binary](https://github.com/google/closure-compiler/wiki/Binary-Downloads) and then unzip it to `closure-compiler` folder in the project. The closure compiler is just need when you want to build production build.
 
 ## Installing
 * `fork` this repo
-* `clone` this repo
 * `npm install` to install all dependencies
 
 ### server

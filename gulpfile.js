@@ -1,6 +1,9 @@
 const gulp = require('gulp');
 const $ = require('gulp-load-plugins')({ lazy: true });
 const fs = require('fs');
+const closureCompiler = require('google-closure-compiler').gulp({
+  extraArguments: ['-Xms2048m']
+});
 
 
 gulp.task('default', ['help']);
@@ -61,22 +64,20 @@ gulp.task('generate-closure-deps-test', () => {
     .pipe(gulp.dest('src/js'));
 });
 
-gulp.task('build-scripts', ['generate-closure-deps', 'generate-soy-template'],  () => {
-  return gulp.src(paths.scripts)
-    .pipe($.closureCompiler({
-      compilerPath: resolveComplilerFile(),
-      fileName: 'app.js',
-      compilerFlags: {
+gulp.task('build-scripts', ['generate-closure-deps', 'generate-soy-template'], () => {
+  return gulp.src(paths.scripts, {base: './'})
+      .pipe(closureCompiler({
         closure_entry_point: 'app.Application',
         compilation_level: 'ADVANCED_OPTIMIZATIONS',
+        warning_level: 'VERBOSE',
         define: [
           "goog.DEBUG=false"
         ],
         only_closure_dependencies: true,
-        output_wrapper: '(function(){%output%})();'
-      }
-    }))
-    .pipe(gulp.dest('dist/js/'));
+        output_wrapper: '(function(){%output%})();',
+        js_output_file: 'app.min.js'
+        }))
+      .pipe(gulp.dest('./dist/js'));
 });
 
 
