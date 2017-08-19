@@ -21,6 +21,13 @@ const paths = {
   ]
 };
 
+gulp.task('lint', () => {
+    return gulp.src(['./src/app/**/*.js','!node_modules/**', '!./src/app/soy**/*.js'])
+      .pipe($.eslint())
+      .pipe($.eslint.format())
+      .pipe($.eslint.failAfterError());
+});
+
 gulp.task('watch', () => {
   gulp.watch([
     'src/js/app/**/*.js',

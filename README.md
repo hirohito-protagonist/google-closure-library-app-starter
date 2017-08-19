@@ -67,12 +67,6 @@ npm t
 # watch mode on files
 npm run test:watch
 ```
-___
-
-# TODO
-* add sprite support
-* eslint
-* dev server with livereload
 
 ___
 

@@ -6,7 +6,9 @@
     "start": "concurrently \"gulp dev\" \"http-server .\"",
     "build": "gulp build",
     "test": "gulp test",
+    "lint": "gulp lint",
     "test:watch": "gulp test-watch",
+    "prepush": "npm run lint",
     "commitmsg": "validate-commit-msg"
   },
   "repository": {
@@ -23,6 +25,7 @@
   "dependencies": {
     "closure-templates": "20160825.0.0",
     "concurrently": "3.5.0",
+    "eslint-config-google": "0.9.1",
     "google-closure-compiler": "20170806.0.0",
     "google-closure-library": "20170626.0.0",
     "gulp": "3.9.1",
@@ -30,6 +33,7 @@
     "gulp-closure-deps": "0.4.0",
     "gulp-concat": "2.6.1",
     "gulp-csso": "3.0.0",
+    "gulp-eslint": "4.0.0",
     "gulp-load-plugins": "1.5.0",
     "gulp-sass": "3.1.0",
     "gulp-sourcemaps": "2.6.0",
