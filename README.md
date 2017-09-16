@@ -4,7 +4,7 @@ This project is an application skeleton for build web apps with google closure l
 ___
 
 ### Quick start
-**Make sure you have Node version >= 6.0 and NPM >= 3**
+**Make sure you have Node version >= 6.0, NPM >= 3 and Java >= 8**
 
 ```bash
 # clone repo
