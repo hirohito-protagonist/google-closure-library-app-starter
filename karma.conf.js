@@ -15,12 +15,16 @@ module.exports = function(config) {
     plugins: [
       'karma-jasmine',
       'karma-coverage',
+      'karma-jasmine-html-reporter',
       'karma-chrome-launcher'
     ],
+    client: {
+      clearContext: false
+    },
     preprocessors: {
       './src/js/app/**/!(*.spec|*.soy)+(.js)': ['coverage']
     },
-    reporters: ['dots', 'coverage'],
+    reporters: ['dots', 'kjhtml', 'coverage'],
     coverageReporter: {
         dir: './tests/report/',
         reporters: [
