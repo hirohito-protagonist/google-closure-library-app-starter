@@ -1,22 +1,20 @@
-goog.provide('app.views.MainView');
+goog.module('app.views.MainView');
+goog.module.declareLegacyNamespace();
 
-goog.require('goog.ui.Component');
+const Component = goog.require('goog.ui.Component');
+const soy = goog.require('goog.soy');
 
-goog.require('goog.soy');
-goog.require('app.views.template');
 
-/**
- * @constructor
- * @extends {goog.ui.Component}
- */
-app.views.MainView = function () {
-    goog.base(this);
-};
-goog.inherits(app.views.MainView, goog.ui.Component);
+class MainView extends Component {
+    constructor() {
+        super();
+    }
 
-/** @override */
-app.views.MainView.prototype.enterDocument = function () {
-    goog.base(this, 'enterDocument');
+    /** @override */
+    enterDocument() {
+        super.enterDocument();
+        this.getElement().innerHTML = '<div class="o-main">Hello form mian component.</div>';
+    }
+}
 
-    goog.soy.renderHtml(this.getElement(), app.views.template.main());
-};
+exports = MainView;

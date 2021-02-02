@@ -18,6 +18,6 @@ describe('Main View Component', function () {
 
     it('should render template', function () {
         
-        expect(decoratedNode.innerHTML).toEqual('<div class="o-main">Hello from soy template.</div>');
+        expect(decoratedNode.innerHTML).toEqual('<div class="o-main">Hello form mian component.</div>');
     });
 });

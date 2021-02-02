@@ -5,19 +5,13 @@ const closureCompiler = require('google-closure-compiler').gulp({
   extraArguments: ['-Xms2048m']
 });
 
-
-gulp.task('default', ['help']);
-gulp.task('dev', ['generate-closure-deps', 'generate-soy-template', 'sass', 'watch']);
-gulp.task('build', ['build-css', 'build-scripts']);
-gulp.task('help', $.taskListing);
-
 const paths = {
   scripts: [
     'node_modules/google-closure-library/closure/goog/**/*.js',
     'node_modules/google-closure-library/third_party/**/*.js',
     'node_modules/closure-templates/soyutils_usegoog.js',
-    'src/js/app/**/!(*.spec)+(.js)',
-    'src/js/app/soy/.cache/**/*.soy.js'
+    'src/js/app/soy/.cache/**/*.soy.js',
+    'src/js/app/**/!(*.spec)+(.js)'
   ]
 };
 
@@ -35,7 +29,7 @@ gulp.task('watch', () => {
     '!src/js/app/soy/**/*.js',
     '!src/js/app/soy/**/*.soy',
     './src/scss/**/*.scss'
-  ], ['generate-closure-deps', 'generate-soy-template', 'sass']);
+  ], gulp.series('generate-closure-deps', 'generate-soy-template', 'sass'));
 });
 
 gulp.task('generate-soy-template', () => {
@@ -44,7 +38,7 @@ gulp.task('generate-soy-template', () => {
       outputDir: '.cache',
       uniqueDir: true,
       loadCompiledTemplates: false,
-      useClosureStyle: true
+      useClosureStyle: false
     }))
     .pipe(gulp.dest('./src/js/app/soy/.cache/'));
 });
@@ -71,7 +65,7 @@ gulp.task('generate-closure-deps-test', () => {
     .pipe(gulp.dest('src/js'));
 });
 
-gulp.task('build-scripts', ['generate-closure-deps', 'generate-soy-template'], () => {
+gulp.task('build-js', () => {
   return gulp.src(paths.scripts, {base: './'})
       .pipe(closureCompiler({
         closure_entry_point: 'app.Application',
@@ -87,6 +81,8 @@ gulp.task('build-scripts', ['generate-closure-deps', 'generate-soy-template'], (
       .pipe(gulp.dest('./dist/js'));
 });
 
+gulp.task('build-scripts', gulp.series('generate-closure-deps', 'generate-soy-template', 'build-js'));
+
 
 gulp.task('sass', () => {
 
@@ -101,7 +97,7 @@ gulp.task('sass', () => {
     .pipe(gulp.dest('./src/css'));
 });
 
-gulp.task('build-css', ['sass'], () => {
+gulp.task('build-css', gulp.series('sass'), () => {
 
   return gulp.src([
     './src/css/*.css'
@@ -117,14 +113,17 @@ function resolveComplilerFile() {
   return `${path}${compilerFile}`;
 }
 
-
-gulp.task('test', ['generate-closure-deps-test'], (done) => {
-  testRunner(true, done)
+gulp.task('test-runner', (done) => {
+  testRunner(true, done);
 });
 
-gulp.task('test-watch', ['generate-closure-deps-test'], (done) => {
-  testRunner(false, done)
+gulp.task('test-runner-watch', (done) => {
+  testRunner(false, done);
 });
+
+gulp.task('test', gulp.series('generate-closure-deps-test', 'test-runner'));
+
+gulp.task('test-watch', gulp.series('generate-closure-deps-test', 'test-runner-watch'));
 
 function testRunner(isSingleRun, done) {
   const karma = require('karma').server;
@@ -143,3 +142,6 @@ function testRunner(isSingleRun, done) {
     }
   }
 }
+
+gulp.task('build', gulp.series('build-css', 'build-scripts'));
+gulp.task('dev', gulp.series('generate-closure-deps', 'generate-soy-template', 'sass', 'watch'));

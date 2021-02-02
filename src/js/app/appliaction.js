@@ -1,16 +1,16 @@
-goog.provide('app.Application');
+goog.module('app.Application');
+goog.module.declareLegacyNamespace();
 
-goog.require('goog.dom');
-
-goog.require('app.views.MainView');
+const dom = goog.require('goog.dom');
+const MainView = goog.require('app.views.MainView');
 
 
 /**
  * Self-calling application entry point.
  * @static
  */
-app.Application.main = function () {
+const main = (() => {
 
-    var main = new app.views.MainView();
-    main.decorate(goog.dom.getElement('app'));
-}();
+    const main = new MainView();
+    main.decorate(dom.getElement('app'));
+})();
