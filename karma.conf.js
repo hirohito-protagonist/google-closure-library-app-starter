@@ -8,7 +8,7 @@ module.exports = function(config) {
       { pattern: 'node_modules/google-closure-library/closure/goog/**/*.js', included: false, served: true, watched: false },
       { pattern: 'node_modules/closure-templates/soyutils_usegoog.js', included: false, served: true, watched: false },
       { pattern: 'src/js/app/soy/.cache/**/*.js', included: false, served: true, watched: false },
-      { pattern: 'src/js/app/**/!(*.spec)+(.js)', included: false, served: true, watched: false },
+      { pattern: 'src/js/app/**/!(*.spec)+(.js)', included: false, served: true, watched: true },
       'src/js/deps.test.js',
       'src/js/app/**/*.spec.js'
     ],

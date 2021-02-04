@@ -126,12 +126,12 @@ gulp.task('test', gulp.series('generate-closure-deps-test', 'test-runner'));
 gulp.task('test-watch', gulp.series('generate-closure-deps-test', 'test-runner-watch'));
 
 function testRunner(isSingleRun, done) {
-  const karma = require('karma').server;
+  const Server = require('karma').Server;
 
-  karma.start({
+  new Server({
     configFile: __dirname + '/karma.conf.js',
     singleRun: isSingleRun
-  }, karmaCompleted);
+  }, karmaCompleted).start();
 
   function karmaCompleted(karmaResult) {
 

@@ -1,23 +1,18 @@
 goog.require('app.views.MainView');
 goog.require('goog.dom');
 
-describe('Main View Component', function () {
+describe('Main View Component', () => {
 
-    var maiViewComponent;
-    var decoratedNode;
+    it('should render template', () => {
+        // Given
+        const mainView = new app.views.MainView();
+        let content = null;
 
-    beforeEach(() => {
-        maiViewComponent = new app.views.MainView();
-        decoratedNode = goog.dom.createDom('div');
-        maiViewComponent.decorate(decoratedNode);
-    });
-
-    afterEach(function () {
-        maiViewComponent.dispose();
-    });
-
-    it('should render template', function () {
+        // When
+        mainView.decorate(goog.dom.createDom('div'));
+        content = mainView.getElement().innerHTML;
         
-        expect(decoratedNode.innerHTML).toEqual('<div class="o-main">Hello form mian component.</div>');
+        // Then
+        expect(content).toEqual('<div class="o-main">Hello form main component.</div>');
     });
 });

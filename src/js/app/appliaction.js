@@ -1,4 +1,5 @@
 goog.module('app.Application');
+goog.module.declareLegacyNamespace();
 
 const dom = goog.require('goog.dom');
 const MainView = goog.require('app.views.MainView');
