@@ -23,7 +23,6 @@
   },
   "homepage": "https://github.com/hirohito-protagonist/google-closure-library-app-starter#readme",
   "dependencies": {
-    "closure-templates": "20160825.0.0",
     "concurrently": "5.3.0",
     "eslint-config-google": "0.14.0",
     "google-closure-compiler": "20210106.0.0",
@@ -37,7 +36,6 @@
     "gulp-load-plugins": "2.0.6",
     "gulp-sass": "4.1.0",
     "gulp-sourcemaps": "3.0.0",
-    "gulp-soynode": "1.5.4",
     "gulp-task-listing": "1.1.0",
     "http-server": "0.10.0",
     "husky": "0.14.3",

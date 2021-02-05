@@ -9,14 +9,12 @@ const paths = {
   scripts: [
     'node_modules/google-closure-library/closure/goog/**/*.js',
     'node_modules/google-closure-library/third_party/**/*.js',
-    'node_modules/closure-templates/soyutils_usegoog.js',
-    'src/js/app/soy/.cache/**/*.soy.js',
     'src/js/app/**/!(*.spec)+(.js)'
   ]
 };
 
 gulp.task('lint', () => {
-    return gulp.src(['./src/app/**/*.js','!node_modules/**', '!./src/app/soy**/*.js'])
+    return gulp.src(['./src/app/**/*.js','!node_modules/**'])
       .pipe($.eslint())
       .pipe($.eslint.format())
       .pipe($.eslint.failAfterError());
@@ -25,23 +23,10 @@ gulp.task('lint', () => {
 gulp.task('watch', () => {
   gulp.watch([
     'src/js/app/**/*.js',
-    'src/js/app/**/*.soy',
-    '!src/js/app/soy/**/*.js',
-    '!src/js/app/soy/**/*.soy',
     './src/scss/**/*.scss'
-  ], gulp.series('generate-closure-deps', 'generate-soy-template', 'sass'));
+  ], gulp.series('generate-closure-deps', 'sass'));
 });
 
-gulp.task('generate-soy-template', () => {
-  return gulp.src(['src/js/app/**/*.soy'])
-    .pipe($.soynode({
-      outputDir: '.cache',
-      uniqueDir: true,
-      loadCompiledTemplates: false,
-      useClosureStyle: false
-    }))
-    .pipe(gulp.dest('./src/js/app/soy/.cache/'));
-});
 
 gulp.task('generate-closure-deps', () => {
 
@@ -81,7 +66,7 @@ gulp.task('build-js', () => {
       .pipe(gulp.dest('./dist/js'));
 });
 
-gulp.task('build-scripts', gulp.series('generate-closure-deps', 'generate-soy-template', 'build-js'));
+gulp.task('build-scripts', gulp.series('generate-closure-deps', 'build-js'));
 
 
 gulp.task('sass', () => {
@@ -144,4 +129,4 @@ function testRunner(isSingleRun, done) {
 }
 
 gulp.task('build', gulp.series('build-css', 'build-scripts'));
-gulp.task('dev', gulp.series('generate-closure-deps', 'generate-soy-template', 'sass', 'watch'));
+gulp.task('dev', gulp.series('generate-closure-deps', 'sass', 'watch'));
