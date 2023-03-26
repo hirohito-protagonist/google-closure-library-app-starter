@@ -37,7 +37,7 @@
     "gulp-sass": "4.1.0",
     "gulp-sourcemaps": "3.0.0",
     "gulp-task-listing": "1.1.0",
-    "http-server": "0.10.0",
+    "http-server": "14.1.1",
     "husky": "0.14.3",
     "jasmine": "2.7.0",
     "karma": "6.1.0",
